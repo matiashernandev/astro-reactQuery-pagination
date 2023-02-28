@@ -1,4 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 import "./App.css";
 import PlanetsList from "./PlanetsList";
 
@@ -7,6 +9,7 @@ const queryClient = new QueryClient();
 function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
+			<ReactQueryDevtools />
 			<header>
 				<h1>
 					<img
