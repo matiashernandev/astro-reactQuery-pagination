@@ -1,29 +1,23 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+import usePlanets from "../hooks/usePlanets.jsx";
+//import { useQuery } from "react-query";
 
 import CardPlanet from "./CardPlanet";
 
-let getPlanets = async (page) => {
-	let response = await fetch(`https://swapi.dev/api/planets/?page=${page}`);
-	return response.json();
-};
-
 export default function PlanetsList() {
 	let [page, setPage] = useState(1);
-	let query = useQuery(["PLANETS", page], () => getPlanets(page), {
-		keepPreviousData: true,
-	});
-	console.log(query);
+
+	const query = usePlanets(page);
+
 	let handleDecrementPage = () => setPage((old) => Math.max(1, old - 1));
 	let handleIncrementPage = () => setPage((old) => old + 1);
-
-	console.log(page);
 
 	if (query.isLoading) {
 		return <h2>Loading planets...</h2>;
 	}
 	if (query.isError) {
-		throw new Error("Hubo un error al cargar los planetas");
+		//		throw new Error("Hubo un error al cargar los planetas");
+		return <h2>Errorrrrrrrrrrrrr</h2>;
 	}
 	return (
 		<>
